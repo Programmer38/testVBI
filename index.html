@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Тестовое задание на должность web-разработчик</title>
+	<script type="text/javascript">
+		function smena_back() {
+			var container = document.getElementById("main");
+			if(container.classList.contains("odd")){
+				container.classList.remove("odd");
+			}
+			else{
+				container.classList.add("odd");
+			}
+
+
+		}
+		function popup(el) {
+			let block_id= el.textContent;
+			document.querySelector(".popup .text_block span.block_id_popup").innerHTML = block_id;
+			let popupBg = document.querySelector('.popup_bg');
+			let popup = document.querySelector('.popup');
+			popupBg.classList.add('popup_bg_active');
+			popup.classList.add('popup_active');
+
+		}
+
+		function close_popup() {
+			let popupBg2 = document.querySelector('.popup_bg');
+			let popup2 = document.querySelector('.popup');
+			popupBg2.classList.remove('popup_bg_active');
+			popup2.classList.remove('popup_active');
+		}
+
+		window.addEventListener('click', function(e){
+			if(e.target.matches(".popup_bg_active")){
+				close_popup()
+			}
+
+
+		});
+		function add_row(){
+			let blocks = document.querySelectorAll("#main .col");
+			let last_block_id = Number(blocks[blocks.length-1].textContent);
+			console.log(last_block_id)
+			let str_append = "<div class='row'><div class='col' onclick='popup(this)'><span class='block_id'>"+ Number(last_block_id+1) +"</span></div><div class='col' onclick='popup(this)'><span class='block_id'>"+ Number(last_block_id+2) +"</span></div><div class='col' onclick='popup(this)'><span class='block_id'>"+ Number(last_block_id+3) +"</span></div><div class='col' onclick='popup(this)'><span class='block_id'>"+ Number(last_block_id+4) +"</span></div></div>";
+			document.querySelector("#main").innerHTML += str_append;
+			console.log(str_append);
+		}
+	</script>
+</head>
+<body>
+	<div class="form">
+		<form action="">
+			<p>
+				<input name="smena" type="checkbox" onclick="smena_back()" /> <span> Смена цвета</span>
+			</p>
+
+		</form>
+	</div>
+	<div class="container" id="main">
+		<div class="row">
+			<div class="col" onclick="popup(this)"><span class="block_id">1</span></div>
+			<div class="col" onclick="popup(this)"><span class="block_id">2</span></div>
+			<div class="col" onclick="popup(this)"><span class="block_id">3</span></div>
+			<div class="col" onclick="popup(this)"><span class="block_id">4</span></div>
+		</div>
+	</div>
+	<div class="button">
+		<button id="add_row" onclick="add_row()">Добавить ряд</button>
+	</div>
+	<div class="popup_bg">
+		<div class="popup" id="popup">
+			<span class="close_popup" onclick="close_popup()" >X</span>
+			<p class="text_block">
+				блок <span class="block_id_popup"> </span>
+			</p>
+		</div>
+	</div>
+
+</body>
+</html>
